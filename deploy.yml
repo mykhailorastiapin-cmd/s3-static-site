@@ -1,0 +1,23 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ tmkbnz1GHbryQA0QcgChdzphS0Nue8iSBKo63XE/ }}
+        aws-secret-access-key: ${{ tmkbnz1GHbryQA0QcgChdzphS0Nue8iSBKo63XE/ }}
+        aws-region: us-east-1
+
+    - name: Sync files to S3
+      run: aws s3 sync . s3://cmtr-aiur8t3l-bucket-1755289218 --delete
